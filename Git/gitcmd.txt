@@ -1,0 +1,93 @@
+Git使用
+
+1. git pull    更新服务器代码到本地
+a). git pull origin master是将origin这个版本库的代码更新到本地的master主分支
+
+2. git push    将本地代码提交到服务器
+
+3. git log    查看提交信息
+a). git log -p    查看历次的log信息及更改情况
+b). git log -p -4    查看距现在最近的4次的log信息及更改情况
+c). git log frameworks/    查看关于frameworks/目录修改相关的log信息
+d). git log --stat    查看log显示文件修改情况
+e). git log --stat packages/apps/Contacts/    查看关于packages/apps/Contacts/目录修改相关的log显示的文件修改情况
+
+4. git status    查看工作目录和代码仓库的改动情况
+
+5. git diff 查看工作目录和本地仓库的差异或者本地仓库各个版本的差异
+a). git diff packages/apps/Contacts/AndoridManifest.xml    查看工作目录中AndoridManifest.xml和本地仓库中AndoridManifest.xml的不同
+b). git diff b46cae3b9a377bcd9cfc249a5778fce647feb961 dc94bf29aab18168e79d6496a89e47dba7a1d494    查看这两个版本的不同(git diff history_old history_current)
+
+6. git commit 提交当前修改内容
+a). git commit file1 file2 -m "log message"    提交file1，file2到本地仓库
+b). git commit -a -m "log message"    提交所有在Git索引中的改动
+
+7. git add 增加文件到Git索引
+a). git add file3 file4    将file3，file4加入到Git索引中
+
+8. git rm 从Git索引移除文件
+a). git rm file3    将file3从Git索引中删除，并从本地删除
+b). git rm --cached FileName 将文件从Git索引中删除，不删除实际的文件
+
+9. git branch    对分支的增、删、查操作
+
+a). git branch    显示所有本地分支
+b). git branch new_branch    在当前版本创建一个名为new_branch的分支
+c). git branch -D new_branch    强制删除名为new_branch的分支
+d). git branch -r查看服务器上分支
+e). git branch -a 显示服务器和本地的所有分支
+
+10. git checkout    在不同的branch切换和还原文件
+
+a). git checkout branch1    切换到branch1分支
+b). git checkout origin/cmcc -b cmcc从服务器上pull分支origin/cmcc到本地的cmcc分支
+c). git checkout /packages/apps/Contacts/AndroidManifest.xml    会将AndroidManifest.xml文件从上一次提交的版本更新回来，未提交的部分会全部回滚
+d). git checkout /package/app/Contacts/ 重新拉这个目录里的文件到本地，如果你不小心把这个目录删除了，可以用这个来恢复
+e). git checkout origin/m9002 -b m9002 下载远程分支origin/m9002到本地分支m9002
+
+11. git reset 将当前的工作目录完全回滚到指定的版本号
+
+a). git reset [--fixed] 3204f2f0bdfd6ada86c587b8927cdc5a15c586c1    只更新索引，不更新工作目录，也就是说所有的本地文件都不会更新
+b). git reset [--soft] 3204f2f0bdfd6ada86c587b8927cdc5a15c586c1    
+c). git reset [--hard] 3204f2f0bdfd6ada86c587b8927cdc5a15c586c1    强制回滚到指定版本号，未提交的和此版本之后的更改全部删掉
+d). git reset --hard origin/master 强制和服务器上的master同步
+
+12. git merge 
+
+a). git merge branch1    将branch1的改动合并到当前所在分支
+
+13. git patch
+a). git format-patch -1 打一个当前提交的补丁，也就是最后一次的提交改动
+b). git fromat-patch -1 6525c43add803bfee37cf5c1cb573ed8aecf529e    打一个指定具体某一次的补丁
+c). git format-patch -2 6525c43add803bfee37cf5c1cb573ed8aecf529e    打基于指定具体某个版本的接连两次的补丁
+
+14. git am
+
+git am xxx.patch提交patch
+
+git am --abort 将git的状态恢复到之前状态就可以继续提交patch了
+
+
+14. tig linux下Git的界面化工具
+a). tig查看当前仓库的所有记录
+b). tig packages/apps/Launcher2/查看目录packages/apps/Launcher2/下的所有记录
+
+15. 很多命令都可以加上目录来限制操作内容
+
+16. git config
+
+git config --global color.ui true git使用彩色
+
+git config --global core.editor vim 使用vim编辑器
+
+
+17. git stash
+
+    git stash 隐藏工作目录的改变
+
+    git stash pop 恢复工作目录的改变
+
+
+18. git whatchanged
+
+git whatchanged packages/apps/Contacts/  查看目录packages/apps/Contacts/下的文件修改状况
